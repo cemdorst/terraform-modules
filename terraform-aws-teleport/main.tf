@@ -107,7 +107,7 @@ resource "aws_instance" "this" {
   count                  = var.number_of_instances
   ami                    = data.aws_ami.this.id 
   instance_type          = var.instance_type
-  key_name               = "cemdorst"
+  key_name               = var.ssh_keyname
   subnet_id              = aws_subnet.this[count.index].id
   vpc_security_group_ids = [aws_security_group.this.id]
 }

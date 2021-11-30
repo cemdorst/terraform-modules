@@ -20,3 +20,9 @@ variable "number_of_instances" {
   type        = number
   default     = 2
 }
+
+variable "ssh_keyname" {
+  description = "SSH key name that is already configured in your account"
+  type        = string
+  default     = "default"
+}
