@@ -6,6 +6,7 @@ variable "zone_name" {
 variable "a_records" {
   description = "Records type A"
   type        = map(string)
+  default     = {}
 }
 
 variable "tags" {
