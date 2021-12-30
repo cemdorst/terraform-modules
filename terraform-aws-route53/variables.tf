@@ -3,8 +3,13 @@ variable "zone_name" {
   type        = string
 }
 
+variable "a_records" {
+  description = "Records type A"
+  type        = map(string)
+}
+
 variable "tags" {
   description = "Tags in all resources"
-  type        = map(string) 
+  type        = map(string)
   default     = { Env = "prod" }
 }
