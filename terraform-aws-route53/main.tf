@@ -5,8 +5,8 @@ resource "aws_route53_zone" "this" {
 resource "aws_route53_record" "this" {
   for_each = var.a_records
   zone_id  = aws_route53_zone.this.id
-  name     = each.value
-  records  = ["${each.key}"]
+  name     = each.key
+  records  = ["${each.value}"]
   type     = "A"
   ttl      = "300"
 }
