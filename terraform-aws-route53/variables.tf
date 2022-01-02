@@ -9,6 +9,12 @@ variable "a_records" {
   default     = {}
 }
 
+variable "cname_records" {
+  description = "Records type CNAME"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags in all resources"
   type        = map(string)
