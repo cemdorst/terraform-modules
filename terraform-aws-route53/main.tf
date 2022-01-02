@@ -19,3 +19,12 @@ resource "aws_route53_record" "cname" {
   type     = "CNAME"
   ttl      = "300"
 }
+
+resource "aws_route53_record" "txt" {
+  for_each = var.txt_records
+  zone_id  = aws_route53_zone.this.id
+  name     = each.key
+  records  = ["${each.value}"]
+  type     = "TXT"
+  ttl      = "300"
+}

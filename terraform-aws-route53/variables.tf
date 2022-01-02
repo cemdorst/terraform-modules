@@ -15,6 +15,12 @@ variable "cname_records" {
   default     = {}
 }
 
+variable "txt_records" {
+  description = "Records type TXT"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags in all resources"
   type        = map(string)
