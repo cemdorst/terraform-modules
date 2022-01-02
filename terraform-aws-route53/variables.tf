@@ -17,7 +17,7 @@ variable "cname_records" {
 
 variable "txt_records" {
   description = "Records type TXT"
-  type        = map(string)
+  type        = map(list(string))
   default     = {}
 }
 
