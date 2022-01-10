@@ -9,6 +9,12 @@ variable "a_records" {
   default     = {}
 }
 
+variable "aaaa_records" {
+  description = "Records type AAAA"
+  type        = map(string)
+  default     = {}
+}
+
 variable "cname_records" {
   description = "Records type CNAME"
   type        = map(string)
@@ -17,6 +23,12 @@ variable "cname_records" {
 
 variable "txt_records" {
   description = "Records type TXT"
+  type        = map(list(string))
+  default     = {}
+}
+
+variable "caa_records" {
+  description = "Records type CAA"
   type        = map(list(string))
   default     = {}
 }
