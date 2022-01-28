@@ -1,6 +1,13 @@
 variable "zone_name" {
   description = "Zone name"
   type        = string
+  default     = ""
+}
+
+variable "zone_id" {
+  description = "Zone ID"
+  type        = string
+  default     = ""
 }
 
 variable "a_records" {
