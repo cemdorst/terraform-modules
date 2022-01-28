@@ -1,10 +1,17 @@
-resource "aws_route53_zone" "this" {
-  name = var.zone_name
+locals {
+  zone_id   = var.zone_id != "" ? var.zone_id : aws_route53_zone.this[var.zone_name].id
+  zone_name = var.zone_id != "" ? {} : { "${var.zone_name}" = "" }
 }
+
+resource "aws_route53_zone" "this" {
+  for_each = local.zone_name
+  name = each.key
+}
+
 
 resource "aws_route53_record" "a" {
   for_each = var.a_records
-  zone_id  = aws_route53_zone.this.id
+  zone_id  = local.zone_id
   name     = each.key
   records  = ["${each.value}"]
   type     = "A"
@@ -13,7 +20,7 @@ resource "aws_route53_record" "a" {
 
 resource "aws_route53_record" "aaaa" {
   for_each = var.aaaa_records
-  zone_id  = aws_route53_zone.this.id
+  zone_id  = local.zone_id
   name     = each.key
   records  = ["${each.value}"]
   type     = "AAAA"
@@ -22,7 +29,7 @@ resource "aws_route53_record" "aaaa" {
 
 resource "aws_route53_record" "cname" {
   for_each = var.cname_records
-  zone_id  = aws_route53_zone.this.id
+  zone_id  = local.zone_id
   name     = each.key
   records  = ["${each.value}"]
   type     = "CNAME"
@@ -31,7 +38,7 @@ resource "aws_route53_record" "cname" {
 
 resource "aws_route53_record" "txt" {
   for_each = var.txt_records
-  zone_id  = aws_route53_zone.this.id
+  zone_id  = local.zone_id
   name     = each.key
   records  = each.value
   type     = "TXT"
@@ -40,7 +47,7 @@ resource "aws_route53_record" "txt" {
 
 resource "aws_route53_record" "caa" {
   for_each = var.caa_records
-  zone_id  = aws_route53_zone.this.id
+  zone_id  = local.zone_id
   name     = each.key
   records  = each.value
   type     = "CAA"
