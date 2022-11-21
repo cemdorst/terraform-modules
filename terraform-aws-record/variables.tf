@@ -16,6 +16,12 @@ variable "type" {
   nullable    = false
 }
 
+variable "ttl" {
+  description = "Record type"
+  type        = string
+  default     = "300"
+}
+
 variable "items" {
   description = "Record items"
   type        = list(string)

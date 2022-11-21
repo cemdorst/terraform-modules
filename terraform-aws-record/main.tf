@@ -3,5 +3,5 @@ resource "aws_route53_record" "this" {
   name    = var.name
   records  = var.items
   type    = var.type
-  ttl     = "300"
+  ttl     = var.ttl
 }
