@@ -22,14 +22,14 @@ locals {
 }
 
 data "digitalocean_image" "this" {
-  slug  = var.image_name
+  slug = var.image_name
 }
 
 resource "digitalocean_droplet" "this" {
-  name      = var.name
-  image     = data.digitalocean_image.this.image
-  region    = var.region
-  size      = local.sizes[var.droplet_size]
+  name   = var.name
+  image  = data.digitalocean_image.this.image
+  region = var.region
+  size   = local.sizes[var.droplet_size]
 
   lifecycle {
     ignore_changes = [
@@ -39,4 +39,20 @@ resource "digitalocean_droplet" "this" {
 
   ssh_keys = var.ssh_keys
   tags     = var.tags
+}
+
+resource "digitalocean_firewall" "this" {
+  count = length(var.inbound_rules) > 0 ? 1 : 0
+  name  = "${var.name}-fw"
+
+  droplet_ids = [digitalocean_droplet.this.id]
+
+  dynamic "inbound_rule" {
+    for_each = var.inbound_rules
+    content {
+      protocol         = inbound_rule.value.protocol
+      port_range       = inbound_rule.value.port
+      source_addresses = inbound_rule.value.allowed_addresses
+    }
+  }
 }

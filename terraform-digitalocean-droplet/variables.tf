@@ -1,3 +1,13 @@
+variable "inbound_rules" {
+  description = "Inbound rules for droplets"
+  type = list(object({
+    protocol          = string,
+    port              = string,
+    allowed_addresses = list(string)
+  }))
+  default = []
+}
+
 variable "name" {
   description = "Droplet Name"
   type        = string
