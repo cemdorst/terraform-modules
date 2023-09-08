@@ -20,6 +20,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [digitalocean_droplet.this](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet) | resource |
+| [digitalocean_firewall.this](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/firewall) | resource |
 | [digitalocean_image.this](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/data-sources/image) | data source |
 
 ## Inputs
@@ -31,6 +32,7 @@ No modules.
 | <a name="input_floating_ip"></a> [floating\_ip](#input\_floating\_ip) | (Optional) Boolean to control whether floating IPs should be created. | `bool` | `false` | no |
 | <a name="input_floating_ip_assign"></a> [floating\_ip\_assign](#input\_floating\_ip\_assign) | (Optional) Boolean controlling whether floatin IPs should be assigned to instances with Terraform. | `bool` | `true` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | The image name or slug to lookup. | `string` | `"centos-7-x64"` | no |
+| <a name="input_inbound_rules"></a> [inbound\_rules](#input\_inbound\_rules) | Inbound rules for droplets | <pre>list(object({<br>    protocol          = string,<br>    port              = string,<br>    allowed_addresses = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | Droplet Name | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Default Region | `string` | `"nyc3"` | no |
 | <a name="input_ssh_keys"></a> [ssh\_keys](#input\_ssh\_keys) | (Optional) A list of SSH IDs or fingerprints to enable. Use curl with the DigitalOcean API, to retrieve them. | `list` | `[]` | no |
